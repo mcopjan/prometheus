@@ -56,6 +56,18 @@ services:
     deploy:
       mode: global
 
+  docker-exporter:
+    image: prometheusnet/docker_exporter
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    ports:
+      - 9417:9417
+    networks:
+      - back-tier
+    restart: always
+    deploy:
+      mode: global
+      
   alertmanager:
     image: prom/alertmanager
     ports:
