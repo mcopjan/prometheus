@@ -55,6 +55,19 @@ services:
       restart_policy:
           condition: on-failure
 
+  docker-exporter:
+    image: prometheusnet/docker_exporter
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    ports:
+      - 9417:9417
+    networks:
+      - monitor-net
+    deploy:
+      mode: global
+      restart_policy:
+          condition: on-failure
+
   alertmanager:
     image: prom/alertmanager
     ports:
