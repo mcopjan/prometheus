@@ -40,14 +40,8 @@ scrape_configs:
     # Override the global default and scrape targets from this job every 5 seconds.
     scrape_interval: 5s
 
-    dns_sd_configs:
-    - names:
-      - 'tasks.selenium-grid-exporter'
-      type: 'A'
-      port: 8082
-
-#     static_configs:
-#          - targets: ['cadvisor:8080']
+    static_configs:
+         - targets: ['selenium-grid-exporter:8082']
 
   - job_name: 'cadvisor'
 
