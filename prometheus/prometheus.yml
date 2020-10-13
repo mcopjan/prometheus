@@ -22,7 +22,13 @@ scrape_configs:
     static_configs:
          - targets: ['localhost:9090']
 
+- job_name: 'selenium'
 
+    # Override the global default and scrape targets from this job every 5 seconds.
+    scrape_interval: 5s
+
+    static_configs:
+         - targets: ['selenium_grid_exporter:8080']
 
   - job_name: 'docker-exporter'
 
@@ -49,17 +55,6 @@ scrape_configs:
       - 'tasks.node-exporter'
       type: 'A'
       port: 9100
-
-  - job_name: 'selenium'
-
-    # Override the global default and scrape targets from this job every 5 seconds.
-    scrape_interval: 5s
-
-    dns_sd_configs:
-    - names:
-      - 'tasks.selenium_grid_exporter'
-      type: 'A'
-      port: 8080
 
   - job_name: 'cadvisor'
 
