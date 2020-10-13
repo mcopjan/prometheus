@@ -129,7 +129,7 @@ services:
       placement:
         constraints:
           - node.role == manager
-		  
+          
   selenium-grid-exporter:
     image: wakeful/selenium-grid-exporter
     ports:
