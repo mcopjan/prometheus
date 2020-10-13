@@ -116,3 +116,54 @@ services:
       placement:
         constraints:
           - node.role==manager
+
+  hub:
+    image: selenium/hub:latest
+    ports:
+      - 4444:4444
+    networks:
+      - monitor-net
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == manager
+		  
+  selenium-grid-exporter:
+    image: wakeful/selenium-grid-exporter
+    ports:
+      - 8082:8080
+    command: "--scrape-uri http://hub:4444"
+    networks:
+      - monitor-net
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == manager
+  chrome:
+    image: nuget-services.spinsport.ludologic.com/docker/spinsport/node-chrome-debug:3.141.59-zinc-gb
+    volumes:
+      - /dev/shm:/dev/shm
+    networks:
+      - monitor-net
+    depends_on:
+      - hub
+    environment:
+      - HUB_PORT_4444_TCP_ADDR=hub
+      - HUB_PORT_4444_TCP_PORT=4444
+      - NODE_MAX_SESSION=5
+      - NODE_MAX_INSTANCES=5
+      - SCREEN_WIDTH=1920
+      - SCREEN_HEIGHT=1080
+      - SCREEN_DEPTH=24
+    entrypoint: bash -c 'SE_OPTS="-host $$HOSTNAME -port 5555" /opt/bin/entry_point.sh'
+    ports:
+      - 5555:5555
+    deploy:
+      replicas: 20
+      placement:
+        constraints:
+          - node.role == worker         
