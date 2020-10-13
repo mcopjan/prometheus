@@ -75,7 +75,7 @@ services:
       - /sys:/sys:ro
       - /var/lib/docker/:/var/lib/docker:ro
     ports:
-      - 8080:8080
+      - 8085:8080
     networks:
       - monitor-net
     deploy:
@@ -130,10 +130,11 @@ services:
         constraints:
           - node.role == manager
           
-  selenium-grid-exporter:
+  selenium_grid_exporter:
     image: wakeful/selenium-grid-exporter
+    build: .
     ports:
-      - 8082:8080
+      - 8080:8080
     command: "--scrape-uri http://hub:4444"
     networks:
       - monitor-net
