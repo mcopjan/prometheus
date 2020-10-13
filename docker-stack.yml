@@ -45,8 +45,6 @@ services:
       - '--path.sysfs=/host/sys'
       - --collector.filesystem.ignored-mount-points
       - "^/(sys|proc|dev|host|etc|rootfs/var/lib/docker/containers|rootfs/var/lib/docker/overlay2|rootfs/run/docker/netns|rootfs/var/lib/docker/aufs)($$|/)"
-    ports:
-      - 9200:9100
     networks:
       - monitor-net
     deploy:
@@ -104,10 +102,10 @@ services:
       restart_policy:
         condition: on-failure
 
-  grafana:
+  visualizer:
     image: dockersamples/visualizer
     ports:
-      - 8081:8080
+      - 8085:8080
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     networks:
