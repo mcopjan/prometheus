@@ -107,11 +107,9 @@ services:
   visualizer:
     image: dockersamples/visualizer
     ports:
-      - 8080:8085
+      - 5000:8080
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-    networks:
-      - monitor-net
     deploy:
       placement:
         constraints:
