@@ -132,7 +132,6 @@ services:
           
   selenium_grid_exporter:
     image: wakeful/selenium-grid-exporter
-    build: .
     ports:
       - 8080:8080
     command: "--scrape-uri http://hub:4444"
