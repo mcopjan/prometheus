@@ -61,7 +61,7 @@ scrape_configs:
       type: 'A'
       port: 8080
 
-  - job_name: 'caadvisor'
+  - job_name: 'cadvisor'
 
     # Override the global default and scrape targets from this job every 5 seconds.
     scrape_interval: 5s
@@ -70,4 +70,4 @@ scrape_configs:
     - names:
       - 'tasks.cadvisor'
       type: 'A'
-      port: 8080
+      port: 8090
