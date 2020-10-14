@@ -195,7 +195,7 @@ services:
     networks:
       - monitor-net
     environment:
-      - TEAMS_INCOMING_WEBHOOK_URL="https://outlook.office.com/webhook/cb7c39e6-4d3c-4e5f-9082-ee1264eb50c6@72aa0d83-624a-4ebf-a683-1b9b45548610/IncomingWebhook/fb1f8903da3943c6bb2f0a01fc6c9c9d/dceedb62-67b5-4156-8992-9bf54b701fbf"
+      - TEAMS_INCOMING_WEBHOOK_URL=\"https://outlook.office.com/webhook/cb7c39e6-4d3c-4e5f-9082-ee1264eb50c6@72aa0d83-624a-4ebf-a683-1b9b45548610/IncomingWebhook/fb1f8903da3943c6bb2f0a01fc6c9c9d/dceedb62-67b5-4156-8992-9bf54b701fbf\"
       - TEAMS_REQUEST_URI=alertmanager
     deploy:
       mode: replicated
