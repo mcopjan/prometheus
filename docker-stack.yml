@@ -189,7 +189,7 @@ services:
           - node.role == worker
 
   prometheus-msteams-alert:
-    image: wakeful/selenium-grid-exporter
+    image: quay.io/prometheusmsteams/prometheus-msteams
     ports:
       - 2000:2000
     networks:
