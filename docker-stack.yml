@@ -131,8 +131,6 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     deploy:
-      mode: replicated
-      replicas: 1
       placement:
         constraints:
           - node.role==manager
@@ -144,8 +142,6 @@ services:
     networks:
       - monitor-net
     deploy:
-      mode: replicated
-      replicas: 1
       placement:
         constraints:
           - node.role == manager
@@ -158,8 +154,6 @@ services:
     networks:
       - monitor-net
     deploy:
-      mode: replicated
-      replicas: 1
       placement:
         constraints:
           - node.role == manager
@@ -200,4 +194,4 @@ services:
     deploy:
       placement:
         constraints:
-           - node.role==manager      
+          - node.role == manager      
