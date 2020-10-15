@@ -8,7 +8,10 @@ global:
   # external systems (federation, remote storage, Alertmanager).
   external_labels:
       monitor: '48k-monitor'
-      
+
+rule_files:
+  - 'alert.rules'
+  
 # alert
 alerting:
   alertmanagers:
