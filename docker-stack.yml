@@ -6,6 +6,8 @@ volumes:
 
 networks:
   monitor-net:
+    driver: overlay
+    attachable: true
 
 services:
 
