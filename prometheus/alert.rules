@@ -75,7 +75,7 @@ groups:
       summary: "Host high CPU load (instance {{ $labels.instance }})"
       description: "CPU load is > 80%\n  VALUE = {{ $value }}\n  LABELS: {{ $labels }}"
 
- - alert: PrometheusAlertmanagerConfigurationReloadFailure
+  - alert: PrometheusAlertmanagerConfigurationReloadFailure
     expr: alertmanager_config_last_reload_successful != 1
     for: 5m
     labels:
@@ -84,7 +84,7 @@ groups:
       summary: "Prometheus AlertManager configuration reload failure (instance {{ $labels.instance }})"
       description: "AlertManager configuration reload error\n  VALUE = {{ $value }}\n  LABELS: {{ $labels }}"
 
-- alert: PrometheusAlertmanagerConfigNotSynced
+  - alert: PrometheusAlertmanagerConfigNotSynced
     expr: count(count_values("config_hash", alertmanager_config_hash)) > 1
     for: 5m
     labels:
