@@ -122,7 +122,7 @@ services:
   vis:
     image: dockersamples/visualizer
     ports:
-      - 5000:8080
+      - 8080:8080
     networks:
       - monitor-net
     volumes:
@@ -135,7 +135,7 @@ services:
   selenium_grid_exporter:
     image: wakeful/selenium-grid-exporter
     ports:
-      - 8080:8080
+      - 8082:8080
     command: "--scrape-uri http://hub:4444"
     networks:
       - monitor-net
