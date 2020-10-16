@@ -20,3 +20,12 @@ groups:
     annotations:
       summary: "Instance {{ $labels.instance }} under high load"
       description: "{{ $labels.instance }} of job {{ $labels.job }} is under high load."
+
+  - alert: selenium_grid_down
+    expr: selenium_grid_up != 1
+    for: 5s
+    labels:
+      severity: page
+    annotations:
+      summary: "Selenium grid down"
+      description: "Selenium grid http://uiplspidoc002.ipswich.mgsops.net:4444/ went offline!"
