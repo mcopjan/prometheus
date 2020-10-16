@@ -1,11 +1,12 @@
 version: '3.7'
-services:
 
 networks:
   monitor-net:
     external: true
     name: monitor-net
-    
+
+services:
+
   hub:
     image: selenium/hub:latest
     ports:
