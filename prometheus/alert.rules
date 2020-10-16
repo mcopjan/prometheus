@@ -13,7 +13,7 @@ groups:
       description: "{{ $labels.instance }} of job {{ $labels.job }} has been down for more than 2 minutes."
 
   - alert: high_load
-    expr: node_load1{name=~".*chrome.*"} > 0.1
+    expr: container_cpu_usage_seconds_total{name=~".*hub.*|.*chrome.*"}/100 > 0.2
     for: 10s
     labels:
       severity: page
