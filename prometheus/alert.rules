@@ -12,15 +12,6 @@ groups:
       summary: "Instance {{ $labels.instance }} down"
       description: "{{ $labels.instance }} of job {{ $labels.job }} has been down for more than 2 minutes."
 
-  - alert: high_load
-    expr: container_cpu_usage_seconds_total{name=~".*hub.*|.*chrome.*"}/100 > 0.2
-    for: 10s
-    labels:
-      severity: page
-    annotations:
-      summary: "Instance {{ $labels.instance }} under high load"
-      description: "{{ $labels.instance }} of job {{ $labels.job }} is under high load."
-
   - alert: selenium_grid_down
     expr: selenium_grid_up != 1
     for: 5s
