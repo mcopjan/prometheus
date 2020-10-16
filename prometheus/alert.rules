@@ -65,7 +65,7 @@ groups:
     annotations:
       summary: "Container killed (instance {{ $labels.instance }})"
       description: "A container has disappeared\n  VALUE = {{ $value }}\n  LABELS: {{ $labels }}"
-	  
+
   - alert: HostHighCpuLoad
     expr: 100 - (avg by(instance) (irate(node_cpu_seconds_total{mode="idle"}[5m])) * 100) > 80
     for: 5m
@@ -74,3 +74,21 @@ groups:
     annotations:
       summary: "Host high CPU load (instance {{ $labels.instance }})"
       description: "CPU load is > 80%\n  VALUE = {{ $value }}\n  LABELS: {{ $labels }}"
+
+ - alert: PrometheusAlertmanagerConfigurationReloadFailure
+    expr: alertmanager_config_last_reload_successful != 1
+    for: 5m
+    labels:
+      severity: warning
+    annotations:
+      summary: "Prometheus AlertManager configuration reload failure (instance {{ $labels.instance }})"
+      description: "AlertManager configuration reload error\n  VALUE = {{ $value }}\n  LABELS: {{ $labels }}"
+
+- alert: PrometheusAlertmanagerConfigNotSynced
+    expr: count(count_values("config_hash", alertmanager_config_hash)) > 1
+    for: 5m
+    labels:
+      severity: warning
+    annotations:
+      summary: "Prometheus AlertManager config not synced (instance {{ $labels.instance }})"
+      description: "Configurations of AlertManager cluster instances are out of sync\n  VALUE = {{ $value }}\n  LABELS: {{ $labels }}"
