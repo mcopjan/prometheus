@@ -2,15 +2,15 @@ groups:
 - name: example
   rules:
 
-  # Alert for any instance that is unreachable for >2 minutes.
+  # Alert for any instance that is unreachable for > 5 minutes.
   - alert: service_down
     expr: up == 0
-    for: 10m
+    for: 5m
     labels:
       severity: page
     annotations:
       summary: "Instance {{ $labels.instance }} down"
-      description: "{{ $labels.instance }} of job {{ $labels.job }} has been down for more than 2 minutes."
+      description: "{{ $labels.instance }} of job {{ $labels.job }} has been down for more than 5 minutes."
 
   - alert: selenium_grid_down
     expr: selenium_grid_up != 1
@@ -20,3 +20,57 @@ groups:
     annotations:
       summary: "Selenium grid down"
       description: "Selenium grid http://uiplspidoc002.ipswich.mgsops.net:4444/ went offline!"
+
+  - alert: ContainerMemoryUsage
+    expr: (sum(container_memory_working_set_bytes) BY (instance, name) / sum(container_spec_memory_limit_bytes > 0) BY (instance, name) * 100) > 80
+    for: 5m
+    labels:
+      severity: warning
+    annotations:
+      summary: "Container Memory usage (instance {{ $labels.instance }})"
+      description: "Container Memory usage is above 80%\n  VALUE = {{ $value }}\n  LABELS: {{ $labels }}"
+
+  - alert: ContainerHighThrottleRate
+    expr: rate(container_cpu_cfs_throttled_seconds_total[3m]) > 1
+    for: 5m
+    labels:
+      severity: warning
+    annotations:
+      summary: "Container high throttle rate (instance {{ $labels.instance }})"
+      description: "Container is being throttled\n  VALUE = {{ $value }}\n  LABELS: {{ $labels }}"
+
+  - alert: ContainerVolumeUsage
+    expr: (1 - (sum(container_fs_inodes_free) BY (instance) / sum(container_fs_inodes_total) BY (instance)) * 100) > 80
+    for: 5m
+    labels:
+      severity: warning
+    annotations:
+      summary: "Container Volume usage (instance {{ $labels.instance }})"
+      description: "Container Volume usage is above 80%\n  VALUE = {{ $value }}\n  LABELS: {{ $labels }}"
+
+  - alert: ContainerCpuUsage
+    expr: (sum(rate(container_cpu_usage_seconds_total{name!=""}[3m])) BY (instance, name) * 100) > 80
+    for: 5m
+    labels:
+      severity: warning
+    annotations:
+      summary: "Container CPU usage (instance {{ $labels.instance }})"
+      description: "Container CPU usage is above 80%\n  VALUE = {{ $value }}\n  LABELS: {{ $labels }}"
+
+  - alert: ContainerKilled
+    expr: time() - container_last_seen > 60
+    for: 5m
+    labels:
+      severity: warning
+    annotations:
+      summary: "Container killed (instance {{ $labels.instance }})"
+      description: "A container has disappeared\n  VALUE = {{ $value }}\n  LABELS: {{ $labels }}"
+	  
+  - alert: HostHighCpuLoad
+    expr: 100 - (avg by(instance) (irate(node_cpu_seconds_total{mode="idle"}[5m])) * 100) > 80
+    for: 5m
+    labels:
+      severity: warning
+    annotations:
+      summary: "Host high CPU load (instance {{ $labels.instance }})"
+      description: "CPU load is > 80%\n  VALUE = {{ $value }}\n  LABELS: {{ $labels }}"
