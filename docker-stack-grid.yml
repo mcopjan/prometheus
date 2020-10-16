@@ -3,7 +3,9 @@ services:
 
 networks:
   monitor-net:
-
+    external: true
+    name: monitor-net
+    
   hub:
     image: selenium/hub:latest
     ports:

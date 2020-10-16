@@ -6,8 +6,8 @@ volumes:
 
 networks:
   monitor-net:
-    driver: overlay
-    attachable: true
+    external: true
+    name: monitor-net
 
 services:
 
