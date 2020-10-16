@@ -1,12 +1,8 @@
-version: '3.5'
+version: '2'
 
 volumes:
     prometheus_data: {}
     grafana_data: {}
-
-networks:
-  monitor-net:
-    name: custom_network
 
 services:
 
@@ -160,4 +156,9 @@ services:
     deploy:
       placement:
         constraints:
-          - node.role == manager      
+          - node.role == manager 
+
+
+networks:
+  monitor-net:
+    name: custom_network          
