@@ -7,7 +7,7 @@ services:
     ports:
       - 4444:4444
     networks:
-      - monitor-net
+      - my-proxy-net
     deploy:
       placement:
         constraints:
@@ -18,7 +18,7 @@ services:
     volumes:
       - /dev/shm:/dev/shm
     networks:
-      - monitor-net
+      - my-proxy-net
     depends_on:
       - hub
     environment:
@@ -39,6 +39,6 @@ services:
           - node.role == worker
 
 networks:
-  monitor-net:
+  my-proxy-net:
     external:
-      name: monitor-net        
+      name: custom_network   
