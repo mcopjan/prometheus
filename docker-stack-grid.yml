@@ -1,5 +1,9 @@
 version: '3.7'
 services:
+
+networks:
+  monitor-net:
+
   hub:
     image: selenium/hub:latest
     ports:
