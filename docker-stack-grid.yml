@@ -14,7 +14,7 @@ services:
           - node.role == manager
 
   chrome:
-    image: nuget-services.spinsport.ludologic.com/docker/spinsport/node-chrome-debug:3.141.59-zinc-gb
+    image: mcopjan/selenium_chromenode_debug_custom:3.141.59-zinc-bg
     volumes:
       - /dev/shm:/dev/shm
     networks:
