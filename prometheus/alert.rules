@@ -30,7 +30,7 @@ groups:
       summary: "Selenium grid pending sessions detected."
       description: "Selenium grid http://uiplinfdoc009.ipswich.mgsops.net:4444/ contains queued up sessions!"
 
-   - alert: HostOutOfMemory
+  - alert: HostOutOfMemory
     expr: node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes * 100 < 20
     for: 5m
     labels:
