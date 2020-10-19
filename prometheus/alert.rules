@@ -30,15 +30,6 @@ groups:
       summary: "Selenium grid pending sessions detected."
       description: "Selenium grid http://uiplspidoc002.ipswich.mgsops.net:4444/ contains queued up sessions!"
 
-  - alert: ContainerMemoryUsage
-    expr: (sum(container_memory_working_set_bytes) BY (instance, name) / sum(container_spec_memory_limit_bytes > 0) BY (instance, name) * 100) > 80
-    for: 5m
-    labels:
-      severity: warning
-    annotations:
-      summary: "Container Memory usage (instance {{ $labels.instance }})"
-      description: "Container Memory usage for {{ $labels.job }} is above 80%\n  VALUE = {{ $value }}\n  LABELS: {{ $labels }}"
-
   - alert: ContainerHighThrottleRate
     expr: rate(container_cpu_cfs_throttled_seconds_total[3m]) > 1
     for: 5m
