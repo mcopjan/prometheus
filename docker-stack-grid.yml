@@ -14,7 +14,7 @@ services:
           - node.role == manager
 
   chrome:
-    image: mcopjan/selenium_chromenode_debug_custom:3.141.59-zinc-bg
+    image: mcopjan/selenium_chromenode_debug_custom:latest
     volumes:
       - /dev/shm:/dev/shm
     networks:
