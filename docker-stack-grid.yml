@@ -13,6 +13,18 @@ services:
         constraints:
           - node.role == manager
 
+  browsermobproxy:
+    image: bwowk/browsermob-proxy
+    ports:
+      - 58200:8200
+      - 58080:8080
+    networks:
+      - my-proxy-net
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
+
   chrome:
     image: mcopjan/selenium_chromenode_debug_custom:latest
     volumes:
