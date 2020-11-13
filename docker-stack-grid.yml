@@ -13,17 +13,6 @@ services:
         constraints:
           - node.role == manager
 
-  browsermobproxy:
-    image: raul72/browsermob-proxy
-    networks:
-      - my-proxy-net
-    environment:
-      - BMP_PORT=68080
-    deploy:
-      placement:
-        constraints:
-          - node.role == manager
-
   chrome:
     image: mcopjan/selenium_chromenode_debug_custom:latest
     volumes:
