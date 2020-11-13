@@ -19,7 +19,6 @@ services:
       - my-proxy-net
     environment:
       - BMP_PORT=68080
-      - BMP_PROXY_TTL=1
     deploy:
       placement:
         constraints:
