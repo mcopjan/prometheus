@@ -14,12 +14,11 @@ services:
           - node.role == manager
 
   browsermobproxy:
-    image: bwowk/browsermob-proxy
-    ports:
-      - 58200:8200
-      - 58080:8080
+    image: raul72/browsermob-proxy
     networks:
       - my-proxy-net
+    environment:
+      - BMP_PORT=58080
     deploy:
       placement:
         constraints:
